@@ -39,5 +39,8 @@ soup = BeautifulSoup(r.content, 'html.parser')
 
 all_players = soup.find_all('span', {'class': 'aufstellung-rueckennummer-name'})
 
-print(all_players)
 
+for a in soup.select("span.aufstellung-rueckennummer-name a"):
+    link = a.get('href')
+    split_link = link.split('/')
+    print(f'{split_link[1]}: {split_link[4]}')
