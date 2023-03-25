@@ -41,7 +41,13 @@ soup = BeautifulSoup(r.content, 'html.parser')
 all_players = soup.find_all('span', {'class': 'aufstellung-rueckennummer-name'})
 
 match = Match()
-for a in soup.select("span.aufstellung-rueckennummer-name a"):
+for i,a in enumerate(soup.select("span.aufstellung-rueckennummer-name a")):
     link = a.get('href')
     split_link = link.split('/')
-    print(f'{split_link[1]}: {split_link[4]}')
+    if i > 10:
+        match.startingTeam2.append(split_link[4])
+    else:
+        match.startingTeam1.append(split_link[4])
+
+print(match.startingTeam1)
+print(match.startingTeam2)
