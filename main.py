@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from match import Match
 
 cookies = {
     '_sp_v1_uid': '1:768:277e6701-fad8-4b57-988e-60071a92cd11',
@@ -39,7 +40,7 @@ soup = BeautifulSoup(r.content, 'html.parser')
 
 all_players = soup.find_all('span', {'class': 'aufstellung-rueckennummer-name'})
 
-
+match = Match()
 for a in soup.select("span.aufstellung-rueckennummer-name a"):
     link = a.get('href')
     split_link = link.split('/')

@@ -1,7 +1,7 @@
 
 
 class Match:
-    def __init__(self):
+    def __init__(self, startingTeam1, startingTeam2, benchTeam1, coachTeam1, benchTeam2, coachTeam2):
         self.startingTeam1 = []
         self.benchTeam1 = []
         self.coachTeam1 = ""
