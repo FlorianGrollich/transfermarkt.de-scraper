@@ -41,6 +41,8 @@ soup = BeautifulSoup(r.content, 'html.parser')
 all_players = soup.find_all('span', {'class': 'aufstellung-rueckennummer-name'})
 
 match = Match()
+
+# Starting Team
 for i,a in enumerate(soup.select("span.aufstellung-rueckennummer-name a")):
     link = a.get('href')
     split_link = link.split('/')
@@ -49,5 +51,20 @@ for i,a in enumerate(soup.select("span.aufstellung-rueckennummer-name a")):
     else:
         match.startingTeam1.append(split_link[4])
 
-print(match.startingTeam1)
-print(match.startingTeam2)
+# Bench
+tables = soup.find_all('table', {'class': 'ersatzbank'})
+for table in tables:
+    for row in table.find_all('tr'):
+        cols = row.find_all('td')
+        if len(cols) > 0:
+            if 'spielposition' in cols[0].get('class', []):
+                # Player
+                link = cols[1].find('a').get('href')
+                split_link = link.split('/')
+                match.substitutes.append(split_link[4])
+            elif 'trainer' in cols[0].get('class', []):
+                # Coach
+                coach_name = cols[1].text.strip()
+                match.coachTeam1 = coach_name
+print(match.benchTeam1)
+print(match.benchTeam2)
