@@ -8,10 +8,11 @@ class TransfermarktspiderSpider(scrapy.Spider):
 
     def parse(self, response):
         spieler = response.css('span.aufstellung-rueckennummer-name')
+        endstand = response.css('div.sb-endstand::text').get()
 
 
         for player in spieler:
             yield {
-                'name': player.css('a::text').get(),
+                'player_link': player.css('a::attr(href)').get(),
             }
 
