@@ -15,4 +15,3 @@ class TransfermarktspiderSpider(scrapy.Spider):
             yield {
                 'player_link': player.css('a::attr(href)').get(),
             }
-
