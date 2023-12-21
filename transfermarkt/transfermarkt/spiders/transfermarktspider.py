@@ -27,7 +27,6 @@ class TransfermarktSpider(scrapy.Spider):
         benchTeam2.pop(-1)
         return benchTeam1, benchTeam2, coachTeam1, coachTeam2
 
-
     def parse(self, response, **kwargs):
         referee = response.xpath('/html/body/div[2]/main/div[1]/div/div/div[2]/div[2]/p[2]/a').css(
             "a::attr(href)").get()
@@ -37,7 +36,7 @@ class TransfermarktSpider(scrapy.Spider):
         benchT1, benchT2, coachT1, coachT2 = self._getBench(response)
         competition = response.css('a.direct-headline__link::attr(href)').get()
         stadium = response.css('span.hide-for-small').css('a::attr(href)').get()
-        amountOfViewes =response.css('span.hide-for-small').css('strong::text)')
+        amountOfViewes = response.css('span.hide-for-small').css('strong::text)')
 
         return {
             "startingTeam1": startingTeam1,
