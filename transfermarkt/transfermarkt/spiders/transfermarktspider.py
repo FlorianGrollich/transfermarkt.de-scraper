@@ -1,4 +1,5 @@
 import scrapy
+import re
 
 
 class TransfermarktSpider(scrapy.Spider):
@@ -27,6 +28,12 @@ class TransfermarktSpider(scrapy.Spider):
         benchTeam2.pop(-1)
         return benchTeam1, benchTeam2, coachTeam1, coachTeam2
 
+    @staticmethod
+    def _amountOfViews(response):
+        views = response.css('span.hide-for-small').css('strong::text').get()
+        numbers = re.findall(r"\d+", views)
+        return int(''.join(numbers))
+
     def parse(self, response, **kwargs):
         referee = response.xpath('/html/body/div[2]/main/div[1]/div/div/div[2]/div[2]/p[2]/a').css(
             "a::attr(href)").get()
@@ -36,7 +43,7 @@ class TransfermarktSpider(scrapy.Spider):
         benchT1, benchT2, coachT1, coachT2 = self._getBench(response)
         competition = response.css('a.direct-headline__link::attr(href)').get()
         stadium = response.css('span.hide-for-small').css('a::attr(href)').get()
-        amountOfViewes = response.css('span.hide-for-small').css('strong::text)')
+        amountOfViews = self._amountOfViews(response)
 
         return {
             "startingTeam1": startingTeam1,
@@ -47,6 +54,7 @@ class TransfermarktSpider(scrapy.Spider):
             "coachTeam2": coachT2,
             "competition": competition,
             "stadium": stadium,
+            "amountOfViews": amountOfViews,
             "referee": referee,
             "endscore": end_score,
             "half_time_score": half_time_score
