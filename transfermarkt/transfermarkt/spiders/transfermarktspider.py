@@ -10,8 +10,10 @@ class TransfermarktSpider(scrapy.Spider):
     @staticmethod
     def _get_halftime_score(response):
         f = response.css('div.sb-halbzeit span::text').get()
+        f = int(''.join(re.findall(r"/d+", f)))
         s = response.css('div.sb-halbzeit::text')[1].get()
-        return f + s
+        s = int(''.join(re.findall(r"/d+", s)))
+        return f, s
 
     @staticmethod
     def _getStartingTeams(response):
@@ -38,7 +40,7 @@ class TransfermarktSpider(scrapy.Spider):
         referee = response.xpath('/html/body/div[2]/main/div[1]/div/div/div[2]/div[2]/p[2]/a').css(
             "a::attr(href)").get()
         end_score = response.css('div.sb-endstand::text').get().strip()
-        half_time_score = self._get_halftime_score(response)
+        halfTimeScoreT1, halfTimeScoreT2 = self._get_halftime_score(response)
         startingTeam1, startingTeam2 = self._getStartingTeams(response)
         benchT1, benchT2, coachT1, coachT2 = self._getBench(response)
         competition = response.css('a.direct-headline__link::attr(href)').get()
@@ -52,10 +54,12 @@ class TransfermarktSpider(scrapy.Spider):
             "benchTeam2": benchT2,
             "coachTeam1": coachT1,
             "coachTeam2": coachT2,
+            "halftimeScoreT1": halfTimeScoreT1,
+            "halftimeScoreT2": halfTimeScoreT2,
             "competition": competition,
             "stadium": stadium,
             "amountOfViews": amountOfViews,
             "referee": referee,
             "endscore": end_score,
-            "half_time_score": half_time_score
+
         }
