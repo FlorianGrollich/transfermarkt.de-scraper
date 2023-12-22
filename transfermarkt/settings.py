@@ -1,4 +1,4 @@
-# Scrapy settings for transfermarkt project
+# Scrapy settings for transfermarktt project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "transfermarkt"
+BOT_NAME = "transfermarktt"
 
-SPIDER_MODULES = ["transfermarkt.spiders"]
-NEWSPIDER_MODULE = "transfermarkt.spiders"
+SPIDER_MODULES = ["transfermarktt.spiders"]
+NEWSPIDER_MODULE = "transfermarktt.spiders"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/117.0"
@@ -44,13 +44,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    "transfermarkt.middlewares.TransfermarktSpiderMiddleware": 543,
+#    "transfermarktt.middlewares.TransfermarktSpiderMiddleware": 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    "transfermarkt.middlewares.TransfermarktDownloaderMiddleware": 543,
+#    "transfermarktt.middlewares.TransfermarktDownloaderMiddleware": 543,
 # }
 
 # Enable or disable extensions
@@ -62,7 +62,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    "transfermarkt.pipelines.TransfermarktPipeline": 300,
+#    "transfermarktt.pipelines.TransfermarktPipeline": 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
