@@ -21,6 +21,6 @@ class MatchItem(scrapy.Item):
     referee = scrapy.Field()
     stadium = scrapy.Field()
     amountOfViewers = scrapy.Field()
-    date = scrapy.Field()
+    #date = scrapy.Field()
     #temperature = scrapy.Field()
     competition = scrapy.Field()
