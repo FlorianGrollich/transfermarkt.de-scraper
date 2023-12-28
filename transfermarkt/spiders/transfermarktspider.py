@@ -1,5 +1,5 @@
 import scrapy
-
+import re
 from transfermarkt.utils.utils import getNumberAllNumsFromStr
 
 
@@ -13,6 +13,14 @@ class TransfermarktSpider(scrapy.Spider):
         f = getNumberAllNumsFromStr(response.css('div.sb-halbzeit span::text').get())
         s = getNumberAllNumsFromStr(response.css('div.sb-halbzeit::text')[1].get())
         return f, s
+
+    @staticmethod
+    def _getDateTime(response):
+        date = response.css('p.sb-datum').css('a::text').getall()
+        time = response.css('p.sb-datum::text').getall()
+        date = re.search(r'\d{2}\.\d{2}\.\d{2}', date[1]).group()
+        time = re.search(r'\d{2}:\d{2}', time[2]).group()
+        return f"{date} {time}"
 
     @staticmethod
     def _getEndScore(response):
@@ -50,6 +58,7 @@ class TransfermarktSpider(scrapy.Spider):
         competition = response.css('a.direct-headline__link::attr(href)').get()
         stadium = response.css('span.hide-for-small').css('a::attr(href)').get()
         amountOfViews = self._amountOfViews(response)
+        date = self._getDateTime(response)
 
         return {
             "team1": team1,
@@ -68,5 +77,6 @@ class TransfermarktSpider(scrapy.Spider):
             "stadium": stadium,
             "amountOfViews": amountOfViews,
             "referee": referee,
+            "date": date
 
         }
