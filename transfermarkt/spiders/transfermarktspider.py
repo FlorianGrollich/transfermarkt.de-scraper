@@ -5,7 +5,7 @@ from transfermarkt.utils.utils import getNumberAllNumsFromStr
 
 class TransfermarktSpider(scrapy.Spider):
     name = "transfermarktspider"
-    allowed_domains = ["transfermarktt.de"]
+    allowed_domains = ["transfermarkt.de"]
     start_urls = ["https://www.transfermarkt.de/spielbericht/index/spielbericht/4095985"]
 
     @staticmethod
