@@ -39,6 +39,8 @@ class TransfermarktSpider(scrapy.Spider):
         return getNumberAllNumsFromStr(response.css('span.hide-for-small').css('strong::text').get())
 
     def parse(self, response, **kwargs):
+        team1 = response.css('div.sb-heim').css('a::attr(href)').get()
+        team2 = response.css('div.sb-gast').css('a::attr(href)').get()
         referee = response.xpath('/html/body/div[2]/main/div[1]/div/div/div[2]/div[2]/p[2]/a').css(
             "a::attr(href)").get()
         endScoreT1, endScoreT2 = self._getEndScore(response)
@@ -50,6 +52,8 @@ class TransfermarktSpider(scrapy.Spider):
         amountOfViews = self._amountOfViews(response)
 
         return {
+            "team1": team1,
+            "team2": team2,
             "startingTeam1": startingTeam1,
             "startingTeam2": startingTeam2,
             "benchTeam1": benchT1,

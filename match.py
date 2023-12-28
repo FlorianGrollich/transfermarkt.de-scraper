@@ -5,7 +5,7 @@ class Match:
         self.coachTeam1 = ""
         self.endScoreTeam1 = 0
         self.halfScoreTeam1 = 0
-        self.teamId1 = ""
+        self.team1 = ""
         self.placementTeam1 = 0
 
         self.startingTeam2 = []
@@ -13,7 +13,7 @@ class Match:
         self.coachTeam2 = ""
         self.endScoreTeam2 = 0
         self.halfScoreTeam2 = 0
-        self.teamId2 = ""
+        self.team2 = ""
         self.placementTeam2 = 0
 
         self.referee = ""
